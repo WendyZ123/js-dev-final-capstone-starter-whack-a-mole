@@ -4,6 +4,8 @@ const startButton = document.querySelector('#start');
 // TODO: Add the missing query selectors:
 const score = document.querySelector('#score'); // Use querySelector() to get the score element
 const timerDisplay = document.querySelector('#timer'); // use querySelector() to get the timer element.
+const song = new Audio("https://github.com/WendyZ123/js-dev-final-capstone-starter-whack-a-mole/blob/main/assets/molesong.mp3?raw=true");
+const audioHit = new Audio("https://github.com/WendyZ123/js-dev-final-capstone-starter-whack-a-mole/blob/main/assets/hit.mp3?raw=true");
 
 let time = 0;
 let timer;
@@ -112,6 +114,7 @@ function gameOver() {
   }
   else {
     gameStopped = stopGame()
+    stopAudio();
     return gameStopped
   }
 }
@@ -236,6 +239,7 @@ function whack(event) {
   // TODO: Write your code here.
   // call updateScore()
   updateScore();
+  hitAudio();
   return points;
 }
 
@@ -289,10 +293,33 @@ function startGame(){
   showUp();
   setEventListeners();
   startTimer();
+  play();
   return "game started";
 }
 
 startButton.addEventListener("click", startGame);
+
+
+function playAudio(audioObject) {
+  audioObject.play();
+}
+
+function loopAudio(audioObject) {
+  audioObject.loop = true;
+  playAudio(audioObject);
+}
+
+function stopAudio(audioObject) {
+  audioObject.pause();
+}
+
+function play(){
+  playAudio(song);
+}
+
+function hitAudio(){
+  playAudio(audioHit);
+}
 
 
 // Please do not modify the code below.
@@ -314,3 +341,8 @@ window.time = time;
 window.setDuration = setDuration;
 window.toggleVisibility = toggleVisibility;
 window.setEventListeners = setEventListeners;
+window.playAudio = playAudio;
+window.loopAudio = loopAudio;
+window.stopAudio = stopAudio;
+window.play = play;
+window.hitAudio = hitAudio;
