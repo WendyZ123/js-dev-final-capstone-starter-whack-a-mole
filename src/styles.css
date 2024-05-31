@@ -80,3 +80,19 @@ h2 {
   top: 0;
   /*transform: scale(1.1);*/
 }
+
+.group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.item {
+  margin: 50px;
+  text-align: center;
+  font-size: 30px;
+}
+
+#difficulty {
+  font-size: 20px;
+}

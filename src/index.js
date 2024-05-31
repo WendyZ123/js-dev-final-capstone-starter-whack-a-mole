@@ -6,12 +6,13 @@ const score = document.querySelector('#score'); // Use querySelector() to get th
 const timerDisplay = document.querySelector('#timer'); // use querySelector() to get the timer element.
 const song = new Audio("https://github.com/WendyZ123/js-dev-final-capstone-starter-whack-a-mole/blob/main/assets/molesong.mp3?raw=true");
 const audioHit = new Audio("https://github.com/WendyZ123/js-dev-final-capstone-starter-whack-a-mole/blob/main/assets/hit.mp3?raw=true");
+const selectElement = document.querySelector('#difficulty')
 
 let time = 0;
 let timer;
 let lastHole = 0;
 let points = 0;
-let difficulty = "hard";
+let difficulty = "easy";
 
 /**
  * Generates a random integer within a range.
@@ -114,7 +115,6 @@ function gameOver() {
   }
   else {
     gameStopped = stopGame()
-    stopAudio();
     return gameStopped
   }
 }
@@ -132,6 +132,16 @@ function showUp() {
   let delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
   const hole = chooseHole(holes);  // TODO: Update so that it use chooseHole()
   return showAndHide(hole, delay);
+}
+
+/**
+*
+* Update Difficulty value based on player's selection
+*
+*/
+function updateDifficulty() {
+  difficulty = selectElement.options
+  [selectElement.selectedIndex].value;
 }
 
 /**
@@ -276,7 +286,7 @@ function setDuration(duration) {
 *
 */
 function stopGame(){
-  // stopAudio(song);  //optional
+  stopAudio(song);
   clearInterval(timer);
   return "game stopped";
 }
@@ -290,9 +300,10 @@ function stopGame(){
 function startGame(){
   setDuration(10);
   clearScore();
-  showUp();
   setEventListeners();
   startTimer();
+  updateDifficulty();
+  showUp();
   play();
   return "game started";
 }
@@ -346,3 +357,4 @@ window.loopAudio = loopAudio;
 window.stopAudio = stopAudio;
 window.play = play;
 window.hitAudio = hitAudio;
+window.updateDifficulty = updateDifficulty;
