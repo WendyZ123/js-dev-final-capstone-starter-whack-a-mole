@@ -247,9 +247,9 @@ function whack(event) {
 function setEventListeners(){
   // TODO: Write your code here
   // forEach mole add the whack event handler when a player clicks on the mole.
-  moles.forEach(mole => {
-    mole.addEventListener('click', whack());
-  })
+  for(let i = 0; i < moles.length; i++){
+    moles[i].addEventListener('click', whack);
+  }
   // return moles;
   return moles;
 }
@@ -285,7 +285,10 @@ function stopGame(){
 */
 function startGame(){
   setDuration(10);
+  clearScore();
   showUp();
+  setEventListeners();
+  startTimer();
   return "game started";
 }
 
